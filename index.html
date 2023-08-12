@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="normalize.css">
+	<title>Document</title>
+</head>
+<body>
+	<section id="startWindows">
+		<div class="start-wrapper">
+			<div class="slart-logo">
+				<img src="img/logo.png" alt="logo">
+			</div>
+			<form id="form">
+				<div class="gamer-name-choice">
+					<div class="gamer-name-one">
+						<label> Введите имя первого игрока:
+							<input id="gamerOneName" name="1" type="text">
+						</label>
+					</div>
+					<div class="gamer-name-two">
+						<label> Введите имя второго игрока:
+							<input id="gamerTwoName"  name="2" type="text" >
+						</label>
+					</div>
+				</div>
+				<div class="gamer-priority-choice">
+					<div class="gamer-choice">
+						<p class="header-priority">Кто будет ходить первым?</p>
+						<label> Игрок 1
+							<input id="player1" name="gamerPriority" type="radio" checked>
+						</label>
+						<label> Игрок 2
+							<input id="player2" name="gamerPriority" type="radio">
+						</label>
+					</div>
+				</div>
+				<div class="start-btn">
+					<button id="startBtn" type="submit">СТАРТ!</button>
+				</div>
+			</form>
+		</div>
+	</section>
+	<section id="gameWindows" class="modal_window">
+		<div class="game_wrapper">
+			<h2 id="firstMove"></h2>
+			<div id="game">
+				<div>
+					<div class="game-cell"></div>
+					<div class="game-cell"></div>
+					<div class="game-cell"></div>
+				</div>
+				<div>
+					<div class="game-cell"></div>
+					<div class="game-cell"></div>
+					<div class="game-cell"></div>
+				</div>
+				<div>
+					<div class="game-cell"></div>
+					<div class="game-cell"></div>
+					<div class="game-cell"></div>
+				</div>
+			</div>
+			<button id="resrtGame">Очистить</button>
+		</div>
+	</section>
+	<section id="winWindows" class="modal_window">
+		<div class="win-wrapper">
+			<img src="img/winner.png" alt="winner">
+			<div>
+				<h2 id="playerNameWin"></h2>
+			</div>
+			<button id="winGame">КЛАСС!</button>
+		</div>
+	</section>
+	<section id="drawModal" class="modal_window">
+		<div class="draw-wrapper">
+			<img src="img/draw.png" alt="winner">
+			<div>
+				<h2>Ничья!</h2>
+			</div>
+			<button id="drawGame">Что ж...!</button>
+		</div>
+	</section>
+
+	
+	<script type="module" src="modules/main.js"></script>
+	<script type="module" src="modules/constants.js"></script>
+</body>
+</html>

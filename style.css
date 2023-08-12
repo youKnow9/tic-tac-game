@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700;800;900&display=swap');
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Montserrat Alternates', sans-serif;
+	background-color: var(--bg-light);
+}
+
+:root {
+	--text-dark: #2B2B2B;
+	--bg-light: #EDE6F5;
+	--blue: #52607E;
+	--pink: #F05F90;
+}
+
+img {
+	width: 150px;
+}
+
+.active_cross {
+	content: url(img/cross.png);
+}
+
+.active_circle {
+	content: url(img/zero.png);
+}
+
+.modal_window {
+	display: none;
+}
+
+.hidden_elem {
+	visibility: hidden;
+}
+
+.start-wrapper, .win-wrapper, .game_wrapper, .draw-wrapper {
+	display: flex;
+	flex-direction: column;
+    	align-items: center;
+	position: relative;
+	top: 15vh;
+	max-width: 230px;
+	margin: 0 auto;
+	gap: 40px;
+	font-size: 20px;
+}
+
+.gamer-choice {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#form, .gamer-name-choice, .game_wrapper {
+	display: flex;
+	flex-direction: column;
+    	align-items: center;
+	gap: 30px;
+}
+
+.header-priority {
+	margin-bottom: 15px;
+}
+
+#form {
+	font-weight: 700;
+	color: var(--text-dark);
+}
+
+#game {
+	display: flex;
+}
+
+input {
+	border: none;
+	border-bottom: 1px solid #2B2B2B;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.game-cell {
+	width: 100px;
+	height: 100px;
+	padding: 15px;
+	border: 1px solid;
+}
+
+#resrtGame, #startBtn, #winGame, #drawGame {
+	width: 230px;
+	border-radius: 10px;
+	background-color: var(--text-dark);
+	color: var(--bg-light);
+	border: none;
+	padding: 10px 0;
+	font-weight: 800;
+	font-size: 30px;
+	cursor: pointer;
+}
