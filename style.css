@@ -87,7 +87,7 @@ input {
 	border: 1px solid;
 }
 
-#resrtGame, #startBtn, #winGame, #drawGame {
+#resetGame, #startBtn, #winGame, #drawGame {
 	width: 230px;
 	border-radius: 10px;
 	background-color: var(--text-dark);

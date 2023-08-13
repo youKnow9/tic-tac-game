@@ -1,6 +1,6 @@
 // решила все же не тащить это в отдельный модуль, т.к. столкнулась с еще кучей ошибок
-import { combinations, arrMoveP1, arrMoveP2, nameP1, nameP2 } from "./constants.js";
-import { winGame1, winGame2, checkDraw } from "./modal.js";
+import { combinations, arrMoveP1, arrMoveP2, nameP1, nameP2, ACTIVE_CIRCLE_CLASS, ACTIVE_CROSS_CLASS } from "./constants.js";
+import { winGameModal, checkDraw } from "./modal.js";
 
 const form = document.getElementById('form');
 const gameCell = document.getElementsByClassName('game-cell');
@@ -31,21 +31,20 @@ function choicePlayers(formNode) {
 export function checkStep(e) {
 	countMove++;
 	firstMoveName.classList.add('hidden_elem');
-	let id1 = e.target.getAttribute('id');
-	let id2 = e.target.getAttribute('id');
+	const idMove = e.target.getAttribute('id');
 	if (countMove % 2 === 0) {
-		createCircle(id1);
-		arrMoveP1.push(id1);
-		combinations.some(combinations => winCheckP1(arrMoveP1, combinations));
+		createShape(idMove);
+		arrMoveP1.push(idMove);
+		combinations.some(combinations => winCheck(arrMoveP1, combinations));
 	} else if (!countMove % 2 === 0){
-		createCross(id2);
-		arrMoveP2.push(id2);
-		combinations.some(combinations => winCheckP2(arrMoveP2, combinations));
+		createShape(idMove);
+		arrMoveP2.push(idMove);
+		combinations.some(combinations => winCheck(arrMoveP2, combinations));
 	};
 
-	if ((arrMoveP1.includes(id1, -1)) || (arrMoveP1.includes(id2, -1))) {
+	if ((arrMoveP1.includes(idMove, -1)) || (arrMoveP2.includes(idMove, -1))) {
 		delListener(e);
-	}
+	};
 };
 
 // функция для передачи имени, кто ходит первым
@@ -69,7 +68,7 @@ export function gameCellsListener() {
 // чтобы не считались клики по заполненным ячейкам слушатель с них убираем
 function delListener(el) {
 	gameCells.forEach((el) => {
-		if (el.classList.contains('active_cross') || el.classList.contains('active_circle')) {
+		if (el.classList.contains(ACTIVE_CROSS_CLASS) || el.classList.contains(ACTIVE_CIRCLE_CLASS)) {
 			el.removeEventListener('click', checkStep);
 		}
 		
@@ -78,39 +77,25 @@ function delListener(el) {
 
 
 // по полученному id ячейки ставим О или Х, считаем ходы
-function createCircle(id1) {
-	const cellCircle = document.getElementById(`${ id1 }`);
-	if ((!cellCircle.classList.contains('active_cross')) && (!cellCircle.classList.contains('active_circle'))) {
-		cellCircle.classList.add('active_circle');
-	} else {
-		return;
+function createShape(id) {
+	if (countMove % 2 === 0) {
+		const cellCircle = document.getElementById(`${ id }`);
+			if ((!cellCircle.classList.contains(ACTIVE_CROSS_CLASS)) && (!cellCircle.classList.contains(ACTIVE_CIRCLE_CLASS))) {
+				cellCircle.classList.add(ACTIVE_CIRCLE_CLASS);
+			};
+	} else if (!countMove % 2 === 0){
+		const cellCircle = document.getElementById(`${ id }`);
+			if ((!cellCircle.classList.contains(ACTIVE_CIRCLE_CLASS)) && (!cellCircle.classList.contains(ACTIVE_CROSS_CLASS))) {
+				cellCircle.classList.add(ACTIVE_CROSS_CLASS);
+			};
 	};
-};
-
-function createCross(id2) {
-	const cellCircle = document.getElementById(`${ id2 }`);
-	if ((!cellCircle.classList.contains('active_circle')) && (!cellCircle.classList.contains('active_cross'))) {
-		cellCircle.classList.add('active_cross');
-	} else {
-		return;
-	};
-	
 };
 
 // функция для проверки комбинаций и определения победителя
-function winCheckP1(a, b) {
-	newArr = b.filter(i => a.includes(i)).length === b.length;
+function winCheck(movePlayer, comb) {
+	newArr = comb.filter(i => movePlayer.includes(i)).length === comb.length;
 	if (newArr === true) {
-		winGame1();
-	} else if ((newArr === false) && (countMove >= 9)) {
-		checkDraw();
-	};
-};
-
-function winCheckP2(a, b) {
-	newArr = b.filter(i => a.includes(i)).length === b.length;
-	if (newArr === true) {
-		winGame2();
+		winGameModal(countMove);
 	} else if ((newArr === false) && (countMove >= 9)) {
 		checkDraw();
 	};
@@ -124,7 +109,7 @@ export function resetGame(e) {
 	newArr = false;
 	countMove = 0;
 	gameCells.forEach(el => { //убираем отрисовку крестиков
-		el.classList.remove('active_circle');
-		el.classList.remove('active_cross');
+		el.classList.remove(ACTIVE_CIRCLE_CLASS);
+		el.classList.remove(ACTIVE_CROSS_CLASS);
 	});
 };
